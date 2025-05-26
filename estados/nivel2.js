@@ -103,7 +103,6 @@ function actualizarNivel2() {
       }
     }
   
-    // Iteramos sobre los enemigos de atrás hacia adelante
     for (let i = enemigos.length - 1; i >= 0; i--) {
       let enemigoActual = enemigos[i];
       enemigoActual.update();
@@ -118,16 +117,16 @@ function actualizarNivel2() {
         return; 
       }
   
-      // Lógica de disparo enemigo
-      let shootProb = 0.025;
+      // disparo enemigo
+      let disparoProba = 0.025;
       if (enemigoActual instanceof Tanque) {
-        shootProb = 0.04;
+        disparoProba = 0.04;
       }
-      if (random(1) < shootProb) {
+      if (random(1) < disparoProba) {
         balasEnemigas.push(new balaEnemigo(enemigoActual.x + enemigoActual.w / 2, enemigoActual.y + enemigoActual.h));
       }
   
-      // Lógica de colisiones de balas del jugador con enemigos
+      // colision bala jugador enemigo
       for (let j = disparos.length - 1; j >= 0; j--) {
         if (disparos[j].colision(enemigoActual)) {
           nave.score += 1;
@@ -194,13 +193,19 @@ function iniciarNivel2() {
         enemigos.push(new Enemigo(100 + i * 100, 60, 5, enemieImg));
     }
 
-    enemigos.push(new movelon(50, 100, 9, movelonImg));
-    enemigos.push(new movelon(width - 100, 150, 9, movelonImg));
-    enemigos.push(new movelon(width / 2 - 50, 200, 9, movelonImg));
-    enemigos.push(new movelon(150, 250, 9, movelonImg));
-    enemigos.push(new movelon(width - 200, 300, 9, movelonImg));
-    enemigos.push(new movelon(20, 200, 9, movelonImg));
-    enemigos.push(new movelon(width - 70, 220, 9, movelonImg));
+    const movelonesConfig = [
+        { x: 50, y: 100 },
+        { x: width - 100, y: 150 },
+        { x: width / 2 - 50, y: 200 },
+        { x: 150, y: 250 },
+        { x: width - 200, y: 300 },
+        { x: 20, y: 200 },
+        { x: width - 70, y: 220 },
+    ];
+    
+    for (let cfg of movelonesConfig) {
+        enemigos.push(new movelon(cfg.x, cfg.y, 9, movelonImg));
+    }
 
     enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));
 

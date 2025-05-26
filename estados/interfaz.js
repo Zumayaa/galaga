@@ -13,16 +13,6 @@ function mostrarMenu() {
   text("ENTER PARA JUGAR", width / 2, 500);
 }
   
-function mostrarVictoria() {
-    fill(255);
-    textSize(32);
-    textAlign(CENTER, CENTER);
-    text("GANASTE", width / 2, height / 2 - 50);
-    textSize(20);
-    text("Ingresa tu nombre y presiona ENTER", width / 2, height / 2 + 50);
-    // HAY Q AÑADIR EL INPUT CAWN
-}
-  
 function perdiste() {
     fill(255, 0, 0);
     textSize(32);
@@ -38,8 +28,7 @@ function transicion() {
   fill(255,0,0);
   textAlign(CENTER, CENTER);
   textSize(28);
-  text(`SIGUIENTE NIVEL`, width / 2, height / 2 - 20);
-  text(`Vidas: ${vidas}`, width / 2, height / 2 + 20);
+  text(`Cargando nivel 2...`, width / 2, height / 2 - 20);
   
   tiempoTransicion--;
   
@@ -58,8 +47,8 @@ function dibujarHUD() {
     textSize(14);
     fill(0, 255, 255);
     textAlign(LEFT, TOP);
-    text(`Nivel: ${obtenerNumeroNivel()}`, 10, 10);
-    text(`Score: ${puntaje}`, 10, 30);
+    text(`Nivel: ${obtenerNumeroNivel()}`, 300, 10);
+    text(`Puntuación: ${puntaje}`, 300, 30);
   
     for (let i = 0; i < nave.lives; i++) {
       rect(width - (i + 1) * 30 - 10, 10, 20, 20); // o imagen de vida
