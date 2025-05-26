@@ -26,7 +26,7 @@ class movelon extends Enemigo {
       this.moveInterval = random(30, 80);
       this.xDirection = random([-1, 1]);
       this.yDirection = random([-1, 1]) * random(1, 2);
-      this.color = color(0, 0, 255);
+      this.color = color(255, 0, 0);
     }
   
     update() {
@@ -58,7 +58,7 @@ class movelon extends Enemigo {
     }
 }
   
-class EnemyBullet {
+class balaEnemigo {
     constructor(x, y, speed = 10) {
       this.x = x;
       this.y = y;
@@ -71,7 +71,7 @@ class EnemyBullet {
     }
   
     dibujar() {
-      fill(255, 0, 255);
+      fill(255, 0, 0);
       ellipse(this.x, this.y, this.r * 2);
     }
   
@@ -87,8 +87,8 @@ class EnemyBullet {
   
 function actualizarNivel2() {
     let cambiarDireccionGrupo = false;
-    for (let enemy of enemigos) {
-      if (!(enemy instanceof movelon) && (enemy.x + enemy.w > width || enemy.x < 0)) {
+    for (let enemigo of enemigos) {
+      if (!(enemigo instanceof movelon) && (enemigo.x + enemigo.w > width || enemigo.x < 0)) {
         cambiarDireccionGrupo = true;
         break;
       }
@@ -96,57 +96,62 @@ function actualizarNivel2() {
   
     if (cambiarDireccionGrupo) {
       direccionEnemigo *= -1;
-      for (let enemy of enemigos) {
-        if (!(enemy instanceof movelon)) {
-          enemy.bajar();
+      for (let enemigo of enemigos) {
+        if (!(enemigo instanceof movelon)) {
+            enemigo.bajar();
         }
       }
     }
   
     // Iteramos sobre los enemigos de atrás hacia adelante
     for (let i = enemigos.length - 1; i >= 0; i--) {
-      let currentEnemy = enemigos[i];
-      currentEnemy.update();
-      currentEnemy.show();
+      let enemigoActual = enemigos[i];
+      enemigoActual.update();
+      enemigoActual.show();
   
-      if (currentEnemy.y + currentEnemy.h > height) {
+      if (enemigoActual.y + enemigoActual.h > height) {
         gameState = "perdiste";
         return; 
       }
-      if (currentEnemy.chocar(nave)) {
+      if (enemigoActual.chocar(nave)) {
         gameState = "perdiste";
         return; 
       }
   
       // Lógica de disparo enemigo
       let shootProb = 0.025;
-      if (currentEnemy instanceof Tanque) {
+      if (enemigoActual instanceof Tanque) {
         shootProb = 0.04;
       }
       if (random(1) < shootProb) {
-        enemyBullets.push(new EnemyBullet(currentEnemy.x + currentEnemy.w / 2, currentEnemy.y + currentEnemy.h));
+        balasEnemigas.push(new balaEnemigo(enemigoActual.x + enemigoActual.w / 2, enemigoActual.y + enemigoActual.h));
       }
   
       // Lógica de colisiones de balas del jugador con enemigos
       for (let j = disparos.length - 1; j >= 0; j--) {
-        if (disparos[j].colision(currentEnemy)) {
+        if (disparos[j].colision(enemigoActual)) {
           nave.score += 1;
   
-          if (currentEnemy instanceof Tanque) {
-            if (currentEnemy.hit()) {
+          if (enemigoActual instanceof Tanque) {
+            if (enemigoActual.hit()) {
               nave.score += 3;
   
               enemigos.splice(i, 1);
-              enemyDestroyed = true;
+              enemigoDestruido = true;
             }
           } else {
             enemigos.splice(i, 1);
-            enemyDestroyed = true;
+            enemigoDestruido = true;
           }
   
           disparos.splice(j, 1);
           break;
         }
+      }
+      if (enemigos.length === 0) {
+        siguienteNivel = "nivel3";
+        tiempoTransicion = 120;
+        gameState = "transicion";
       }
     }
 }
@@ -167,12 +172,12 @@ function nivel2() {
       }
     }
   
-    for (let i = enemyBullets.length - 1; i >= 0; i--) {
-      enemyBullets[i].mover();
-      enemyBullets[i].mostrar();
-      if (enemyBullets[i].colision(nave)) {
+    for (let i = balasEnemigas.length - 1; i >= 0; i--) {
+        balasEnemigas[i].mover();
+        balasEnemigas[i].mostrar();
+      if (balasEnemigas[i].colision(nave)) {
         nave.score -= 1;
-        enemyBullets.splice(i, 1);
+        balasEnemigas.splice(i, 1);
         nave.lives--;
         if (nave.lives <= 0) {
           gameState = "perdiste";
@@ -199,5 +204,5 @@ function iniciarNivel2() {
 
     enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));
 
-    enemyBullets = [];
+    balasEnemigas = [];
 }

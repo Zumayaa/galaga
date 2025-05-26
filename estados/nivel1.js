@@ -20,8 +20,8 @@ function nivel1() {
 function actualizarNivel1() {
     let cambiarDireccion = false;
   
-    for (let enemy of enemigos) {
-      if (enemy.x + enemy.w > width || enemy.x < 0) {
+    for (let enemigo of enemigos) {
+      if (enemigo.x + enemigo.w > width || enemigo.x < 0) {
         cambiarDireccion = true;
         break;
     }
@@ -29,8 +29,8 @@ function actualizarNivel1() {
   
 if (cambiarDireccion) {
     direccionEnemigo *= -1;
-    for (let enemy of enemigos) {
-        enemy.bajar();
+    for (let enemigo of enemigos) {
+      enemigo.bajar();
     }
 }
   

@@ -1,7 +1,7 @@
 let nave;
 let disparos = [];
 let enemigos = [];
-let enemyBullets = []; 
+let balasEnemigas = []; 
 let direccionEnemigo = 1;
 let nivelActual = 1;
 
@@ -19,6 +19,7 @@ function preload(){
   enemieImg = loadImage('images/enemigo.png');
   movelonImg = loadImage('images/enemigo.png');
   tanqueIMG = loadImage('images/enemigo2.png');  
+  nave = loadImage('images/nave.png');
 }
 
 function setup() {

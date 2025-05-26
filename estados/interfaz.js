@@ -35,11 +35,11 @@ function perdiste() {
 function transicion() {
   background(0);
 
-  fill(255);
+  fill(255,0,0);
   textAlign(CENTER, CENTER);
   textSize(28);
-  text(`¡Pasaste al siguiente nivel!`, width / 2, height / 2 - 20);
-  text(`Te quedan ${vidas} vidas`, width / 2, height / 2 + 20);
+  text(`SIGUIENTE NIVEL`, width / 2, height / 2 - 20);
+  text(`Vidas: ${vidas}`, width / 2, height / 2 + 20);
   
   tiempoTransicion--;
   
