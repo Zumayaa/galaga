@@ -51,7 +51,7 @@ function dibujarHUD() {
     text(`Puntuación: ${puntaje}`, 300, 30);
   
     for (let i = 0; i < nave.lives; i++) {
-      rect(width - (i + 1) * 30 - 10, 10, 20, 20); // o imagen de vida
+      rect(width - (i + 1) * 30 - 10, 10, 10, 10); // PONER IMAGEN
     }
 }
   
