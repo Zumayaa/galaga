@@ -24,7 +24,7 @@ function actualizarDisparos() {
       disparos[i].mover();
       disparos[i].mostrar();
   
-      if (disparos[i].fueraDePantalla()) {
+      if (disparos[i].desaparece()) {
         disparos.splice(i, 1);
         continue;
       }

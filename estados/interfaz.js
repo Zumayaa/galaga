@@ -1,9 +1,5 @@
 let imgTitulo;
 
-function preload() {
-  imgTitulo = loadImage('images/title.png'); 
-}
-
 function mostrarMenu() {
   background(10);
   
@@ -37,17 +33,25 @@ function perdiste() {
 }
   
 function transicion() {
-    fill(255);
-    textAlign(CENTER, CENTER);
-    textSize(28);
-    text(`¡Pasaste al siguiente nivel!`, width / 2, height / 2 - 20);
-    text(`Te quedan ${vidas} vidas`, width / 2, height / 2 + 20);
+  background(0);
+
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(28);
+  text(`¡Pasaste al siguiente nivel!`, width / 2, height / 2 - 20);
+  text(`Te quedan ${vidas} vidas`, width / 2, height / 2 + 20);
   
-    tiempoTransicion--;
+  tiempoTransicion--;
   
-    if (tiempoTransicion <= 0) {
-      gameState = siguienteNivel;
+  if (tiempoTransicion <= 0) {
+    if (siguienteNivel === "nivel2") {
+      iniciarNivel2(); 
+    } else if (siguienteNivel === "nivel3") {
+      iniciarNivel3(); 
     }
+
+    gameState = siguienteNivel;
+  }
 }
   
 function dibujarHUD() {

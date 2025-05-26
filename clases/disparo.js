@@ -14,7 +14,7 @@ class Disparo {
       ellipse(this.x, this.y, this.r * 2);
     }
   
-    fueraDePantalla() {
+    desaparece() {
       return this.y < 0;
     }
   }

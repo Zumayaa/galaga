@@ -1,13 +1,23 @@
 let nave;
 let disparos = [];
 let enemigos = [];
+let enemyBullets = []; 
 let direccionEnemigo = 1;
+
+
 
 let puntaje = 0;
 let vidas = 3;
 let gameState = "menu"; // 'menu', 'nivel1', 'transicion', 'nivel2', etc.
 let siguienteNivel = "";
 let tiempoTransicion = 100;
+
+function preload(){
+  imgTitulo = loadImage('images/title.png'); 
+  enemieImg = loadImage('images/enemigo.png');
+  erraticEnemyImg = loadImage('images/enemigo.png');
+  strongEnemyImg = loadImage('images/enemigo.png');  
+}
 
 function setup() {
   createCanvas(700, 700);
@@ -54,6 +64,7 @@ function keyPressed() {
     iniciarNivel1();
     gameState = "nivel1";
   }
+  
 
   if (gameState === "nivel1" || gameState === "nivel2" || gameState === "nivel3") {
     if (keyCode === LEFT_ARROW) nave.mover(-1);

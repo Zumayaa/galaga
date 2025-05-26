@@ -1,13 +1,16 @@
 class Enemigo {
-  constructor(x, y) {
+  constructor(x, y, speed = 2, img = null) {
     this.x = x;
     this.y = y;
-    this.w = 30;
-    this.h = 20;
+    this.w = 40;
+    this.h = 40;
+    this.speed = speed;
+    this.img = img;
+    this.color = color(255);
   }
 
   update() {
-    this.x += direccionEnemigo * 2;
+    this.x += direccionEnemigo * this.speed;
   }
 
   bajar() {
@@ -15,8 +18,12 @@ class Enemigo {
   }
 
   show() {
-    fill(255, 0, 0);
-    rect(this.x, this.y, this.w, this.h);
+    if (this.img) {
+      image(this.img, this.x, this.y, this.w, this.h);
+    } else {
+      fill(this.color);
+      rect(this.x, this.y, this.w, this.h);
+    }
   }
 
   colisionaConJugador(jugador) {
