@@ -14,8 +14,8 @@ function colisionRect(a, b) {
 function mostrarHUD() {
     fill(255);
     textSize(16);
-    text(`Puntaje: ${puntaje}`, 10, 20);
-    text(`Vidas: ${vidas}`, 10, 40);
+    text(`Puntaje: ${nave.score}`, 10, 20);
+    text(`Vidas: ${nave.lives}`, 10, 40);
     text(`Nivel: ${nivel}`, 10, 60);
 }
 

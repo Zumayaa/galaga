@@ -61,7 +61,7 @@ function dibujarHUD() {
     text(`Nivel: ${obtenerNumeroNivel()}`, 10, 10);
     text(`Score: ${puntaje}`, 10, 30);
   
-    for (let i = 0; i < vidas; i++) {
+    for (let i = 0; i < nave.lives; i++) {
       rect(width - (i + 1) * 30 - 10, 10, 20, 20); // o imagen de vida
     }
 }

@@ -98,8 +98,8 @@ class StrongEnemy extends Enemigo {
     }
   
     colision(nave) {
-      let d = dist(this.x, this.y, nave.x + nave.width / 2, nave.y + nave.height / 2);
-      return d < this.r + nave.width / 2 && d < this.r + nave.height / 2;
+        let d = dist(this.x, this.y, nave.x + nave.w / 2, nave.y + nave.h / 2);
+        return d < this.r + nave.w / 2 && d < this.r + nave.h / 2;
     }
   }
   
@@ -134,12 +134,12 @@ class StrongEnemy extends Enemigo {
   
       if (currentEnemy.y + currentEnemy.h > height) {
         console.log("¡Un enemigo llegó al fondo! Game Over.");
-        estadoJuego = "gameOver";
+        gameState = "perdiste";
         return; 
       }
       if (currentEnemy.colisionaConJugador(nave)) {
         console.log("¡Un enemigo colisionó con el jugador! Game Over.");
-        estadoJuego = "gameOver";
+        gameState = "perdiste";
         return; 
       }
   
@@ -202,7 +202,7 @@ function nivel2() {
         enemyBullets.splice(i, 1);
         nave.lives--;
         if (nave.lives <= 0) {
-          estadoJuego = "gameOver";
+          gameState = "perdiste";
         }
       }
     }
