@@ -88,10 +88,13 @@ class StrongEnemy extends Enemigo {
       this.y += this.speed;
     }
   
-  
     dibujar() {
       fill(255, 0, 255);
       ellipse(this.x, this.y, this.r * 2);
+    }
+  
+    mostrar() {
+      this.dibujar(); 
     }
   
     colision(nave) {
@@ -99,6 +102,7 @@ class StrongEnemy extends Enemigo {
       return d < this.r + nave.width / 2 && d < this.r + nave.height / 2;
     }
   }
+  
   
   let enemyShootInterval = 60;
   let enemyShootTimer = 0;
@@ -131,13 +135,11 @@ class StrongEnemy extends Enemigo {
       if (currentEnemy.y + currentEnemy.h > height) {
         console.log("¡Un enemigo llegó al fondo! Game Over.");
         estadoJuego = "gameOver";
-         shootEnemy.play();
         return; 
       }
       if (currentEnemy.colisionaConJugador(nave)) {
         console.log("¡Un enemigo colisionó con el jugador! Game Over.");
         estadoJuego = "gameOver";
-         shootEnemy.play();
         return; 
       }
   
@@ -153,14 +155,12 @@ class StrongEnemy extends Enemigo {
       // Lógica de colisiones de balas del jugador con enemigos
       for (let j = disparos.length - 1; j >= 0; j--) {
         if (disparos[j].colision(currentEnemy)) {
-          shootEnemy.play();
           nave.score += 1;
   
   
           if (currentEnemy instanceof StrongEnemy) {
             if (currentEnemy.hit()) {
               nave.score += 3;
-              shootEnemy.play();
   
               enemigos.splice(i, 1);
               enemyDestroyed = true;
@@ -182,7 +182,8 @@ function nivel2() {
     actualizarNivel2();
   
     nave.mostrar();
-    nave.mover();
+    dibujarHUD();
+    actualizarDisparos();
   
     for (let i = disparos.length - 1; i >= 0; i--) {
       disparos[i].mover();
@@ -197,7 +198,6 @@ function nivel2() {
       enemyBullets[i].mostrar();
       if (enemyBullets[i].colision(nave)) {
         nave.score -= 1;
-        shootEnemy.play();
         console.log("¡Te golpeó una bala enemiga!");
         enemyBullets.splice(i, 1);
         nave.lives--;
