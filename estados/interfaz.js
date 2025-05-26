@@ -47,7 +47,6 @@ function dibujarHUD() {
     textSize(14);
     fill(0, 255, 255);
     textAlign(LEFT, TOP);
-    text(`Nivel: ${obtenerNumeroNivel()}`, 300, 10);
     text(`Puntuación: ${puntaje}`, 300, 30);
   
     for (let i = 0; i < nave.lives; i++) {
