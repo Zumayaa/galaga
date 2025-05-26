@@ -1,4 +1,4 @@
-class StrongEnemy extends Enemigo {
+class Tanque extends Enemigo {
 
     constructor(x, y, speed = 3, img = null) {
       super(x, y, speed, img);
@@ -13,14 +13,7 @@ class StrongEnemy extends Enemigo {
         textSize(12);
         textAlign(CENTER);
         text(this.lives, this.x + this.w / 2, this.y + this.h / 2 + 5);
-      } else {
-        fill(this.color);
-        rect(this.x, this.y, this.w + 10, this.h + 10);
-        fill(255);
-        textSize(12);
-        textAlign(CENTER);
-        text(this.lives, this.x + this.w / 2 + 5, this.y + this.h / 2 + 5);
-      }
+      } 
     }
   
     hit() {
@@ -77,7 +70,7 @@ class StrongEnemy extends Enemigo {
   }
   
   class EnemyBullet {
-    constructor(x, y, speed = 12) {
+    constructor(x, y, speed = 10) {
       this.x = x;
       this.y = y;
       this.r = 3;
@@ -102,10 +95,6 @@ class StrongEnemy extends Enemigo {
         return d < this.r + nave.w / 2 && d < this.r + nave.h / 2;
     }
   }
-  
-  
-  let enemyShootInterval = 60;
-  let enemyShootTimer = 0;
   
   function actualizarNivel2() {
     let cambiarDireccionGrupo = false;
@@ -133,19 +122,17 @@ class StrongEnemy extends Enemigo {
       currentEnemy.show();
   
       if (currentEnemy.y + currentEnemy.h > height) {
-        console.log("¡Un enemigo llegó al fondo! Game Over.");
         gameState = "perdiste";
         return; 
       }
       if (currentEnemy.colisionaConJugador(nave)) {
-        console.log("¡Un enemigo colisionó con el jugador! Game Over.");
         gameState = "perdiste";
         return; 
       }
   
       // Lógica de disparo enemigo
       let shootProb = 0.025;
-      if (currentEnemy instanceof StrongEnemy) {
+      if (currentEnemy instanceof Tanque) {
         shootProb = 0.04;
       }
       if (random(1) < shootProb) {
@@ -158,7 +145,7 @@ class StrongEnemy extends Enemigo {
           nave.score += 1;
   
   
-          if (currentEnemy instanceof StrongEnemy) {
+          if (currentEnemy instanceof Tanque) {
             if (currentEnemy.hit()) {
               nave.score += 3;
   
@@ -198,7 +185,6 @@ function nivel2() {
       enemyBullets[i].mostrar();
       if (enemyBullets[i].colision(nave)) {
         nave.score -= 1;
-        console.log("¡Te golpeó una bala enemiga!");
         enemyBullets.splice(i, 1);
         nave.lives--;
         if (nave.lives <= 0) {
@@ -223,10 +209,9 @@ function iniciarNivel2() {
     enemigos.push(new ErraticEnemy(150, 250, 9, erraticEnemyImg));
     enemigos.push(new ErraticEnemy(width - 200, 300, 9, erraticEnemyImg));
     enemigos.push(new ErraticEnemy(20, 200, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(width - 70, 220, 9, erraticEnemyImg));
+    enemigos.push(new ErraticEnemy(width - 70, 220, 9, tanqueIMG));
 
-
-    enemigos.push(new StrongEnemy(width / 2, 30, 3, strongEnemyImg));
+    enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));
 
     enemyBullets = [];
 }

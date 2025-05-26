@@ -16,7 +16,7 @@ function preload(){
   imgTitulo = loadImage('images/title.png'); 
   enemieImg = loadImage('images/enemigo.png');
   erraticEnemyImg = loadImage('images/enemigo.png');
-  strongEnemyImg = loadImage('images/enemigo.png');  
+  tanqueIMG = loadImage('images/enemigo2.png');  
 }
 
 function setup() {
