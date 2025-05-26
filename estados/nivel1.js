@@ -37,7 +37,7 @@ if (cambiarDireccion) {
 for (let i = enemigos.length - 1; i >= 0; i--) {
     const e = enemigos[i];
   
-    if (e.y + e.h > height || e.colisionaConJugador(nave)) {
+    if (e.y + e.h > height || e.chocar(nave)) {
         gameState = "perdiste";
         return;
     }
@@ -51,5 +51,5 @@ for (let i = enemigos.length - 1; i >= 0; i--) {
       tiempoTransicion = 120;
       gameState = "transicion";
     }
-  }
+}
   

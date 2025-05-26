@@ -3,6 +3,8 @@ let disparos = [];
 let enemigos = [];
 let enemyBullets = []; 
 let direccionEnemigo = 1;
+let nivelActual = 1;
+
 
 
 
@@ -15,7 +17,7 @@ let tiempoTransicion = 100;
 function preload(){
   imgTitulo = loadImage('images/title.png'); 
   enemieImg = loadImage('images/enemigo.png');
-  erraticEnemyImg = loadImage('images/enemigo.png');
+  movelonImg = loadImage('images/enemigo.png');
   tanqueIMG = loadImage('images/enemigo2.png');  
 }
 

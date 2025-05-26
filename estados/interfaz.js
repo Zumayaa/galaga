@@ -7,17 +7,17 @@ function mostrarMenu() {
   image(imgTitulo, width / 2, 100, 600, 200);
   
   noStroke();
-  fill(255);
+  fill(255, 0, 0);
   textSize(20);
   textAlign(CENTER, CENTER);
-  text("ENTER para jugar", width / 2, 250);
+  text("ENTER PARA JUGAR", width / 2, 500);
 }
   
 function mostrarVictoria() {
     fill(255);
     textSize(32);
     textAlign(CENTER, CENTER);
-    text("Felicidades, has ganado", width / 2, height / 2 - 50);
+    text("GANASTE", width / 2, height / 2 - 50);
     textSize(20);
     text("Ingresa tu nombre y presiona ENTER", width / 2, height / 2 + 50);
     // HAY Q AÑADIR EL INPUT CAWN
@@ -27,9 +27,9 @@ function perdiste() {
     fill(255, 0, 0);
     textSize(32);
     textAlign(CENTER, CENTER);
-    text("GAME OVER", width / 2, height / 2 - 50);
+    text("PERDISTE", width / 2, height / 2 - 50);
     textSize(20);
-    text("Presiona ENTER para reiniciar", width / 2, height / 2 + 50);
+    text("ENTER para reiniciar", width / 2, height / 2 + 50);
 }
   
 function transicion() {

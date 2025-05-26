@@ -7,13 +7,7 @@ class Tanque extends Enemigo {
     }
   
     show() {
-      if (this.img) {
-        image(this.img, this.x, this.y, this.w, this.h);
-        fill(255);
-        textSize(12);
-        textAlign(CENTER);
-        text(this.lives, this.x + this.w / 2, this.y + this.h / 2 + 5);
-      } 
+        image(this.img, this.x, this.y, this.w, this.h); 
     }
   
     hit() {
@@ -25,8 +19,8 @@ class Tanque extends Enemigo {
     }
 }
   
-  class ErraticEnemy extends Enemigo {
-    constructor(x, y, speed = 9, img = null) {
+class movelon extends Enemigo {
+    constructor(x, y, speed = 5, img = null) {
       super(x, y, speed, img);
       this.moveTimer = 0;
       this.moveInterval = random(30, 80);
@@ -60,16 +54,11 @@ class Tanque extends Enemigo {
     }
   
     show() {
-      if (this.img) {
         image(this.img, this.x, this.y, this.w, this.h);
-      } else {
-        fill(this.color);
-        rect(this.x, this.y, this.w, this.h);
-      }
     }
-  }
+}
   
-  class EnemyBullet {
+class EnemyBullet {
     constructor(x, y, speed = 10) {
       this.x = x;
       this.y = y;
@@ -94,13 +83,12 @@ class Tanque extends Enemigo {
         let d = dist(this.x, this.y, nave.x + nave.w / 2, nave.y + nave.h / 2);
         return d < this.r + nave.w / 2 && d < this.r + nave.h / 2;
     }
-  }
+}
   
-  function actualizarNivel2() {
+function actualizarNivel2() {
     let cambiarDireccionGrupo = false;
     for (let enemy of enemigos) {
-      // Los ErraticEnemy no siguen el movimiento de grupo
-      if (!(enemy instanceof ErraticEnemy) && (enemy.x + enemy.w > width || enemy.x < 0)) {
+      if (!(enemy instanceof movelon) && (enemy.x + enemy.w > width || enemy.x < 0)) {
         cambiarDireccionGrupo = true;
         break;
       }
@@ -109,7 +97,7 @@ class Tanque extends Enemigo {
     if (cambiarDireccionGrupo) {
       direccionEnemigo *= -1;
       for (let enemy of enemigos) {
-        if (!(enemy instanceof ErraticEnemy)) {
+        if (!(enemy instanceof movelon)) {
           enemy.bajar();
         }
       }
@@ -125,7 +113,7 @@ class Tanque extends Enemigo {
         gameState = "perdiste";
         return; 
       }
-      if (currentEnemy.colisionaConJugador(nave)) {
+      if (currentEnemy.chocar(nave)) {
         gameState = "perdiste";
         return; 
       }
@@ -144,7 +132,6 @@ class Tanque extends Enemigo {
         if (disparos[j].colision(currentEnemy)) {
           nave.score += 1;
   
-  
           if (currentEnemy instanceof Tanque) {
             if (currentEnemy.hit()) {
               nave.score += 3;
@@ -162,7 +149,7 @@ class Tanque extends Enemigo {
         }
       }
     }
-  }
+}
   
 function nivel2() {
   
@@ -198,18 +185,17 @@ function iniciarNivel2() {
     enemigos = [];
     direccionEnemigo = 1;
 
-    // Enemigos normales
     for (let i = 0; i < 3; i++) {
         enemigos.push(new Enemigo(100 + i * 100, 60, 5, enemieImg));
     }
 
-    enemigos.push(new ErraticEnemy(50, 100, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(width - 100, 150, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(width / 2 - 50, 200, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(150, 250, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(width - 200, 300, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(20, 200, 9, erraticEnemyImg));
-    enemigos.push(new ErraticEnemy(width - 70, 220, 9, tanqueIMG));
+    enemigos.push(new movelon(50, 100, 9, movelonImg));
+    enemigos.push(new movelon(width - 100, 150, 9, movelonImg));
+    enemigos.push(new movelon(width / 2 - 50, 200, 9, movelonImg));
+    enemigos.push(new movelon(150, 250, 9, movelonImg));
+    enemigos.push(new movelon(width - 200, 300, 9, movelonImg));
+    enemigos.push(new movelon(20, 200, 9, movelonImg));
+    enemigos.push(new movelon(width - 70, 220, 9, movelonImg));
 
     enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));
 

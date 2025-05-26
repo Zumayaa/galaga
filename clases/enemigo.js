@@ -26,7 +26,7 @@ class Enemigo {
     }
   }
 
-  colisionaConJugador(jugador) {
+  chocar(jugador) {
     return (
       this.x < jugador.x + jugador.w &&
       this.x + this.w > jugador.x &&
