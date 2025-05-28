@@ -7,6 +7,10 @@ body {
       height: 100vh;
       font-family: 'Courier New', monospace;
       color: white;
+      background-image: url('images/cielo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
 }
 
 #canvas-container {

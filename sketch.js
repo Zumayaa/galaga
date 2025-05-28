@@ -21,6 +21,7 @@ function preload(){
   tanqueIMG = loadImage('images/enemigo2.png');  
   naveIMG = loadImage('images/nave.png');
   helicoptero = loadImage('images/helicoptero.png');
+  fondoImg = loadImage("images/sky.jpg");
 }
 
 function setup() {
@@ -31,7 +32,8 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  imageMode(CORNER); // 👈 Esto asegura que se dibuje desde la esquina superior izquierda
+  image(fondoImg, 0, 0, width, height);
 
   switch (gameState) {
     case "menu":
