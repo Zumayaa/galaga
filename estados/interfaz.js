@@ -4,7 +4,7 @@ function mostrarMenu() {
   background(10);
   
   imageMode(CENTER); 
-  image(imgTitulo, width / 2, 100, 600, 200);
+  image(imgTitulo, width / 2, 200, 600, 200);
   
   noStroke();
   fill(255, 0, 0);

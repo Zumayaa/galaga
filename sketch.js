@@ -19,11 +19,13 @@ function preload(){
   enemieImg = loadImage('images/enemigo.png');
   movelonImg = loadImage('images/enemigo.png');
   tanqueIMG = loadImage('images/enemigo2.png');  
-  nave = loadImage('images/nave.png');
+  naveIMG = loadImage('images/nave.png');
+  helicoptero = loadImage('images/helicoptero.png');
 }
 
 function setup() {
-  createCanvas(700, 700);
+  let canvas = createCanvas(700, 700);
+  canvas.parent("canvas-container");
   nave = new Nave();
   cargarTopScores();
 }

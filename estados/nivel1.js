@@ -5,7 +5,7 @@ function iniciarNivel1() {
     direccionEnemigo = 1;
   
     for (let i = 0; i < 10; i++) {
-      enemigos.push(new Enemigo(i * 60 + 40, 100));
+      enemigos.push(new Enemigo(i * 60 + 40, 100, 3 , enemieImg));
     }
 }
   

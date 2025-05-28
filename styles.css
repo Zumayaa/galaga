@@ -1,5 +1,20 @@
 body {
-    font-family: 'Press Start 2P', cursive;
-    margin: 0;
-    overflow: hidden;
+      margin: 0;
+      background: radial-gradient(circle at center, #000 60%, #111 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Courier New', monospace;
+      color: white;
+}
+
+#canvas-container {
+      border: 5px solid white;
+      box-shadow: 0 0 40px white;
+      padding: 5px;
+}
+
+canvas {
+      display: block;
 }
