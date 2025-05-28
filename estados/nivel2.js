@@ -117,7 +117,7 @@ function iniciarNivel2() {
     ];
     
     for (let cfg of movelonesConfig) {
-        enemigos.push(new movelon(cfg.x, cfg.y, 9, movelonImg));
+        enemigos.push(new movelon(cfg.x, cfg.y, 3, movelonImg));
     }
 
     enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));

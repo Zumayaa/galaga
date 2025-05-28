@@ -19,6 +19,7 @@ function preload(){
   enemieImg = loadImage('images/enemigo.png');
   movelonImg = loadImage('images/enemigo.png');
   tanqueIMG = loadImage('images/enemigo2.png');  
+  boss = loadImage('images/boss.png');  
   naveIMG = loadImage('images/nave.png');
   helicoptero = loadImage('images/helicoptero.png');
   fondoImg = loadImage("images/sky.jpg");
@@ -74,8 +75,8 @@ function keyPressed() {
   
 
   if (gameState === "nivel1" || gameState === "nivel2" || gameState === "nivel3") {
-    if (keyCode === LEFT_ARROW) nave.mover(-1);
-    if (keyCode === RIGHT_ARROW) nave.mover(1);
+    if (keyCode === LEFT_ARROW) nave.mover(-2.5);
+    if (keyCode === RIGHT_ARROW) nave.mover(2.5);
     if (key === ' ') nave.disparar();
   }
 

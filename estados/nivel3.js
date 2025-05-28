@@ -115,13 +115,27 @@ function iniciarNivel3() {
         { x: width - 200, y: 300 },
         { x: 20, y: 200 },
         { x: width - 70, y: 220 },
+
+        { x: 100, y: 350 },
+        { x: width / 2 + 80, y: 180 },
+        { x: 280, y: 300 },
+        { x: width - 250, y: 120 },
+        { x: 200, y: 400 },
+        { x: width - 180, y: 370 },
+        { x: width / 2 - 100, y: 150 },
+        { x: 80, y: 180 },
+        { x: width - 130, y: 280 },
     ];
-    
+        
     for (let cfg of movelonesConfig) {
-        enemigos.push(new movelon(cfg.x, cfg.y, 9, movelonImg));
+        enemigos.push(new movelon(cfg.x, cfg.y, 5, movelonImg));
     }
 
     enemigos.push(new Tanque(width / 2, 30, 3, tanqueIMG));
+
+    enemigos.push(new Tanque(width / 2, 90, 5, tanqueIMG));
+
+    enemigos.push(new Jefe(width / 1, 90, 1, boss));
 
     balasEnemigas = [];
 }
