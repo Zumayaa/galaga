@@ -28,7 +28,7 @@ function transicion() {
   fill(255,0,0);
   textAlign(CENTER, CENTER);
   textSize(28);
-  text(`Cargando nivel 2...`, width / 2, height / 2 - 20);
+  text(`Cargando nivel...`, width / 2, height / 2 - 20);
   
   tiempoTransicion--;
   
