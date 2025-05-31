@@ -5,6 +5,8 @@ let balasEnemigas = [];
 let direccionEnemigo = 1;
 let nivelActual = 1;
 let rolita;
+let tiro;
+let enemigoTiro;
 
 
 
@@ -25,6 +27,8 @@ function preload(){
   helicoptero = loadImage('images/helicoptero.png');
   fondoImg = loadImage("images/sky.jpg");
   rolita = loadSound("images/song.mp3");
+  tiro = loadSound("images/gun.mp3");
+  enemigoTiro = loadSound("images/enemigo.mp3");
 }
 
 function setup() {
@@ -35,7 +39,7 @@ function setup() {
 }
 
 function draw() {
-  imageMode(CORNER); // 👈 Esto asegura que se dibuje desde la esquina superior izquierda
+  imageMode(CORNER);
   image(fondoImg, 0, 0, width, height);
 
   switch (gameState) {
@@ -77,6 +81,10 @@ function keyPressed() {
     }
     iniciarNivel1();
     gameState = "nivel1";
+  }
+
+  if (key === ' ') {
+    tiro.play();
   }
   
 

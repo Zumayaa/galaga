@@ -23,10 +23,12 @@ function actualizarNivel2() {
   
       if (enemigoActual.y + enemigoActual.h > height) {
         gameState = "perdiste";
+        enemigoTiro.play();
         return; 
       }
       if (enemigoActual.chocar(nave)) {
         gameState = "perdiste";
+        enemigoTiro.play();
         return; 
       }
   
@@ -42,11 +44,13 @@ function actualizarNivel2() {
       // colision bala jugador enemigo
       for (let j = disparos.length - 1; j >= 0; j--) {
         if (disparos[j].colision(enemigoActual)) {
+          enemigoTiro.play();
           nave.score += 1;
   
           if (enemigoActual instanceof Tanque) {
             if (enemigoActual.hit()) {
               nave.score += 3;
+              enemigoTiro.play();
   
               enemigos.splice(i, 1);
               enemigoDestruido = true;
@@ -89,6 +93,7 @@ function nivel2() {
         balasEnemigas[i].mostrar();
       if (balasEnemigas[i].colision(nave)) {
         nave.score -= 1;
+        enemigoTiro.play();
         balasEnemigas.splice(i, 1);
         nave.lives--;
         if (nave.lives <= 0) {
