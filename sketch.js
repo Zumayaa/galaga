@@ -52,7 +52,7 @@ function draw() {
       break;
 
     case "transicion":
-      transicion(); // <- viene de interfaz.js
+      transicion(); 
       break;
 
     case "nivel2":
