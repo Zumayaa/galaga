@@ -4,6 +4,7 @@ let enemigos = [];
 let balasEnemigas = []; 
 let direccionEnemigo = 1;
 let nivelActual = 1;
+let rolita;
 
 
 
@@ -23,6 +24,7 @@ function preload(){
   naveIMG = loadImage('images/nave.png');
   helicoptero = loadImage('images/helicoptero.png');
   fondoImg = loadImage("images/sky.jpg");
+  rolita = loadSound("images/song.mp3");
 }
 
 function setup() {
@@ -69,6 +71,10 @@ function draw() {
 
 function keyPressed() {
   if (gameState === "menu" && key === 'Enter') {
+    if (!rolita.isPlaying()) {
+      rolita.setVolume(0.5);
+      rolita.loop(); 
+    }
     iniciarNivel1();
     gameState = "nivel1";
   }
