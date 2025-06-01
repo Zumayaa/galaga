@@ -51,18 +51,20 @@ function actualizarNivel3() {
           if (disparos[j].colision(enemigoActual)) {
               if (enemigoActual instanceof Tanque) {
                   nave.score += 1;
-                  if (enemigoActual.hit()) {
+                  if (enemigoActual.hit(disparos[j].damage)) { 
                       nave.score += 3;
                       enemigos.splice(i, 1);
                       enemigoDestruido = true;
                   }
               } 
               else if (enemigoActual instanceof Jefe) {
-                  nave.score += 2; 
-                  if (enemigoActual.hit()) {
-                      nave.score += 10; 
-                      enemigos.splice(i, 1);
-                      enemigoDestruido = true;
+                  if (!enemigoActual.invulnerable) {
+                      nave.score += 2;
+                      if (enemigoActual.hit(disparos[j].damage)) { 
+                          nave.score += 10;
+                          enemigos.splice(i, 1);
+                          enemigoDestruido = true;
+                      }
                   }
               }
               else {
@@ -76,7 +78,7 @@ function actualizarNivel3() {
           }
       }
       if (enemigos.length === 0) {
-        siguienteNivel = "nivel3";
+        siguienteNivel = "ganaste";
         tiempoTransicion = 120;
         gameState = "transicion";
       }
@@ -149,7 +151,7 @@ function iniciarNivel3() {
 
     enemigos.push(new Tanque(width / 2, 90, 5, tanqueIMG));
 
-    enemigos.push(new Jefe(width / 2, 50, 5, boss));
+    enemigos.push(new Jefe(width / 2, 50, 3, boss));
 
     balasEnemigas = [];
 }

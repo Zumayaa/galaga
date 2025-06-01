@@ -13,15 +13,58 @@ function mostrarMenu() {
   textAlign(CENTER, CENTER);
   text("ENTER PARA JUGAR", width / 2, 500);
 }
-  
-function perdiste() {
-    fill(255, 255, 255);
-    textFont('Courier New'); 
+
+function mostrarVictoria() {
+    background(0, 0, 0, 200);
+    fill(0, 255, 0);
     textSize(32);
     textAlign(CENTER, CENTER);
-    text("PERDISTE", width / 2, height / 2 - 50);
-    textSize(20);
-    text("ENTER para reiniciar", width / 2, height / 2 + 50);
+    text("¡VICTORIA!", width / 2, height / 2 - 100);
+    
+    fill(255);
+    textSize(24);
+    text(`Felicidades ${playerName}`, width / 2, height / 2 - 50);
+    text(`Puntaje: ${nave.score}`, width / 2, height / 2);
+    
+    fill(150, 255, 150);
+    textSize(18);
+    text("Presiona ENTER para volver al menú", width / 2, height / 2 + 100);
+}
+  
+function mostrarDerrota() {
+    background(0, 0, 0, 200);
+    fill(255, 0, 0);
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width / 2, height / 2 - 100);
+    
+    fill(255);
+    textSize(24);
+    text(`${playerName}`, width / 2, height / 2 - 50);
+    text(`Puntaje: ${nave.score}`, width / 2, height / 2);
+    
+    fill(255, 150, 150);
+    textSize(18);
+    text("Presiona ENTER para reintentar", width / 2, height / 2 + 100);
+}
+
+function mostrarTopScores() {
+    if (scores.length === 0) return;
+    
+    let startY = (gameState === "menu") ? 400 : height / 2 + 150;
+    
+    fill(255, 255, 0);
+    textSize(24);
+    textAlign(CENTER);
+    text("MEJORES PUNTAJES", width / 2, startY - 30);
+    
+    textSize(18);
+    for (let i = 0; i < min(scores.length, 5); i++) {
+        fill(255);
+        text(`${i + 1}. ${scores[i].name}`, width / 2 - 80, startY + i * 30);
+        fill(255, 255, 0);
+        text(`${scores[i].score}`, width / 2 + 80, startY + i * 30);
+    }
 }
   
 function transicion() {

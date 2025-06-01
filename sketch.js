@@ -8,9 +8,9 @@ let rolita;
 let tiro;
 let enemigoTiro;
 let boss;
-
-
-
+let playerName = "";
+let showNameInput = true;
+let scores = [];
 
 let puntaje = 0;
 let vidas = 3;
@@ -35,8 +35,16 @@ function preload(){
 function setup() {
   let canvas = createCanvas(700, 700);
   canvas.parent("canvas-container");
-  nave = new Nave();
-  cargarTopScores();
+  canvas.hide();
+    
+  document.getElementById('name-input').style.display = 'flex';
+    
+  document.getElementById('start-game').addEventListener('click', function() {
+      playerName = document.getElementById('player-name').value.trim() || "Jugador";
+      document.getElementById('name-input').style.display = 'none';
+      canvas.show();
+      iniciarJuego();
+  });
 }
 
 function draw() {
@@ -46,6 +54,7 @@ function draw() {
   switch (gameState) {
     case "menu":
       mostrarMenu();
+      mostrarTopScores();
       break;
 
     case "nivel1":
@@ -66,36 +75,38 @@ function draw() {
 
     case "ganaste":
       mostrarVictoria();
+      mostrarTopScores();
       break;
 
     case "perdiste":
-      perdiste();
+      mostrarDerrota();
+      mostrarTopScores();
       break;
   }
 }
 
 function keyPressed() {
-  if (gameState === "menu" && key === 'Enter') {
-    if (!rolita.isPlaying()) {
-      rolita.setVolume(0.5);
-      rolita.loop(); 
+    if (gameState === "menu" && key === 'Enter') {
+        if (!rolita.isPlaying()) {
+            rolita.setVolume(0.5);
+            rolita.loop(); 
+        }
+        iniciarNivel1();
+        gameState = "nivel1";
     }
-    iniciarNivel1();
-    gameState = "nivel1";
-  }
 
-  if (key === ' ') {
-    tiro.play();
-  }
-  
+    if (key === ' ') {
+        tiro.play();
+    }
 
-  if (gameState === "nivel1" || gameState === "nivel2" || gameState === "nivel3") {
-    if (keyCode === LEFT_ARROW) nave.mover(-2.5);
-    if (keyCode === RIGHT_ARROW) nave.mover(2.5);
-    if (key === ' ') nave.disparar();
-  }
+    if (gameState === "nivel1" || gameState === "nivel2" || gameState === "nivel3") {
+        if (keyCode === LEFT_ARROW) nave.mover(-2.5);
+        if (keyCode === RIGHT_ARROW) nave.mover(2.5);
+        if (key === ' ') nave.disparar();
+    }
 
-  if ((gameState === "ganaste" || gameState === "perdiste") && key === 'Enter') {
-    location.reload();
-  }
+    if ((gameState === "ganaste" || gameState === "perdiste") && key === 'Enter') {
+        resetGame();
+        gameState = "menu";
+    }
 }

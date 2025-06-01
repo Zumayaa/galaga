@@ -1,3 +1,4 @@
+let topScores = [];
 function colision(d, e) {
     return d.x > e.x && d.x < e.x + e.w && d.y < e.y + e.h;
 }
@@ -9,6 +10,33 @@ function colisionRect(a, b) {
       a.y < b.y + b.h &&
       a.y + a.h > b.y
     );
+}
+
+function cargarTopScores() {
+    let guardados = localStorage.getItem("galaga_scores");
+    if (guardados) {
+        scores = JSON.parse(guardados);
+    } else {
+        scores = [];
+    }
+}
+
+function guardarTopScore() {
+    // Agregar el nuevo puntaje
+    scores.push({
+        name: playerName,
+        score: nave.score,
+        date: new Date().toLocaleDateString()
+    });
+    
+    // Ordenar por puntaje (mayor a menor)
+    scores.sort((a, b) => b.score - a.score);
+    
+    // Mantener solo los top 5
+    scores = scores.slice(0, 5);
+    
+    // Guardar en localStorage
+    localStorage.setItem("galaga_scores", JSON.stringify(scores));
 }
 
 function mostrarHUD() {
