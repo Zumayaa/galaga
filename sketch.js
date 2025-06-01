@@ -36,6 +36,8 @@ function setup() {
   let canvas = createCanvas(700, 700);
   canvas.parent("canvas-container");
   canvas.hide();
+
+  cargarTopScores();
     
   document.getElementById('name-input').style.display = 'flex';
     
@@ -43,7 +45,7 @@ function setup() {
       playerName = document.getElementById('player-name').value.trim() || "Jugador";
       document.getElementById('name-input').style.display = 'none';
       canvas.show();
-      iniciarNivel1(); // Cambiado de iniciarJuego() a iniciarNivel1()
+      iniciarNivel1();
       gameState = "nivel1";
   });
 }

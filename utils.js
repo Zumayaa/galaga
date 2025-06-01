@@ -14,16 +14,18 @@ function colisionRect(a, b) {
 
 function actualizarScoreboard() {
     const scoresList = document.getElementById('scores-list');
+    if (!scoresList) return;
+    
     scoresList.innerHTML = '';
     
-    const sortedScores = [...scores].sort((a, b) => b.score - a.score).slice(0, 5);
-    
-    sortedScores.forEach((score, index) => {
+    scores.forEach((score, index) => {
         const scoreItem = document.createElement('div');
         scoreItem.className = 'score-item';
         scoreItem.innerHTML = `
-            <span class="score-name">${index + 1}. ${score.name}</span>
+            <span class="score-position">${index + 1}.</span>
+            <span class="score-name">${score.name}</span>
             <span class="score-points">${score.score} pts</span>
+            <span class="score-date">${score.date}</span>
         `;
         scoresList.appendChild(scoreItem);
     });
@@ -34,20 +36,37 @@ function cargarTopScores() {
     if (guardados) {
         scores = JSON.parse(guardados);
     } else {
-        scores = [];
+        scores = [
+            { name: "AAA", score: 1000, date: new Date().toLocaleDateString() },
+            { name: "BBB", score: 800, date: new Date().toLocaleDateString() },
+            { name: "CCC", score: 600, date: new Date().toLocaleDateString() },
+            { name: "DDD", score: 400, date: new Date().toLocaleDateString() },
+            { name: "EEE", score: 200, date: new Date().toLocaleDateString() }
+        ];
+        localStorage.setItem("galaga_scores", JSON.stringify(scores));
     }
-    return scores;
+    actualizarScoreboard();
 }
 
 function guardarTopScore() {
-    scores.push({
-        name: playerName,
-        score: nave.score,
-        date: new Date().toLocaleDateString()
-    });
+    if (!playerName || puntaje <= 0) return;
+    
+    const existingPlayerIndex = scores.findIndex(s => s.name === playerName);
+    
+    if (existingPlayerIndex >= 0) {
+        if (puntaje > scores[existingPlayerIndex].score) {
+            scores[existingPlayerIndex].score = puntaje;
+            scores[existingPlayerIndex].date = new Date().toLocaleDateString();
+        }
+    } else {
+        scores.push({
+            name: playerName,
+            score: puntaje,
+            date: new Date().toLocaleDateString()
+        });
+    }
     
     scores.sort((a, b) => b.score - a.score);
-
     scores = scores.slice(0, 5);
     
     localStorage.setItem("galaga_scores", JSON.stringify(scores));
@@ -149,30 +168,6 @@ function verificarTransiciones() {
     if (vidas <= 0) {
         guardarTopScore(); 
         gameState = "perdiste";
-    }
-}
-
-// TOP SCORES
-function cargarTopScores() {
-    let guardados = localStorage.getItem("galaga_scores");
-    if (guardados) {
-      topScores = JSON.parse(guardados);
-    }
-}
-  
-function guardarTopScore() {
-    if (playerName && puntaje > 0) {
-        scores.push({
-            name: playerName,
-            score: puntaje,
-            date: new Date().toLocaleDateString()
-        });
-  
-        scores.sort((a, b) => b.score - a.score);
-        scores = scores.slice(0, 5);
-        
-        localStorage.setItem("galaga_scores", JSON.stringify(scores));
-        actualizarScoreboard();
     }
 }
   
