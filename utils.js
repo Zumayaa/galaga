@@ -37,11 +37,11 @@ function cargarTopScores() {
         scores = JSON.parse(guardados);
     } else {
         scores = [
-            { name: "AAA", score: 1000, date: new Date().toLocaleDateString() },
-            { name: "BBB", score: 800, date: new Date().toLocaleDateString() },
-            { name: "CCC", score: 600, date: new Date().toLocaleDateString() },
-            { name: "DDD", score: 400, date: new Date().toLocaleDateString() },
-            { name: "EEE", score: 200, date: new Date().toLocaleDateString() }
+            { name: "Marcos", score: 10, date: new Date().toLocaleDateString() },
+            { name: "Pancho", score: 9, date: new Date().toLocaleDateString() },
+            { name: "Zumaya", score: 8, date: new Date().toLocaleDateString() },
+            { name: "Canelita", score: 7, date: new Date().toLocaleDateString() },
+            { name: "Nose", score: 6, date: new Date().toLocaleDateString() }
         ];
         localStorage.setItem("galaga_scores", JSON.stringify(scores));
     }

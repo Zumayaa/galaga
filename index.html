@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <title>Galaga Modular</title>
-    <script src="https://unpkg.com/p5@1.6.0/lib/p5.min.js"></script>
-    <script src="https://unpkg.com/p5@1.6.0/lib/addons/p5.sound.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Clases -->
-    <script src="clases/Nave.js"></script>
-    <script src="clases/Disparo.js"></script>
+    <!-- Carga las clases en el orden correcto -->
     <script src="clases/Enemigo.js"></script>
-    <script src="clases/tanque.js"></script>
-    <script src="clases/movelon.js"></script>
-    <script src="clases/balaEnemigo.js"></script>
-    <script src="clases/jefe.js"></script>
+    <script src="clases/Disparo.js"></script>
+    <script src="clases/Nave.js"></script>
+    <script src="clases/Tanque.js"></script>
+    <script src="clases/Movelon.js"></script>
+    <script src="clases/Jefe.js"></script>
+    <script src="clases/BalaEnemigo.js"></script>
 
     <!-- Utilidades -->
     <script src="utils.js"></script>
 
-    <!-- Estados -->
+    <!-- Estados del juego -->
     <script src="estados/nivel1.js"></script>
     <script src="estados/nivel2.js"></script>
     <script src="estados/nivel3.js"></script>
@@ -30,7 +28,6 @@
     <!-- Principal -->
     <script src="sketch.js"></script>
 </head>
-
 <body>
     <div id="canvas-container"></div>
     <div id="name-input" class="modal">
@@ -41,9 +38,8 @@
         </div>
     </div>
     <div id="score-board" class="score-board">
-    <h3>TOP 5 PUNTAJES</h3>
-    <div id="scores-list"></div>
-</div>
+        <h3>TOP 5 PUNTAJES</h3>
+        <div id="scores-list"></div>
+    </div>
 </body>
-
 </html>
