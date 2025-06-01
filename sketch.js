@@ -7,6 +7,7 @@ let nivelActual = 1;
 let rolita;
 let tiro;
 let enemigoTiro;
+let boss;
 
 
 

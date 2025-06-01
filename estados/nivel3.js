@@ -19,7 +19,13 @@ function actualizarNivel3() {
   
     for (let i = enemigos.length - 1; i >= 0; i--) {
       let enemigoActual = enemigos[i];
-      enemigoActual.update();
+      
+      if (typeof enemigoActual.update === "function") {
+        enemigoActual.update();
+      } else if (typeof enemigoActual.mover === "function") {
+        enemigoActual.mover();
+      }
+
       enemigoActual.show();
   
       if (enemigoActual.y + enemigoActual.h > height) {
@@ -42,24 +48,32 @@ function actualizarNivel3() {
   
       // colision bala jugador enemigo
       for (let j = disparos.length - 1; j >= 0; j--) {
-        if (disparos[j].colision(enemigoActual)) {
-          nave.score += 1;
-  
-          if (enemigoActual instanceof Tanque) {
-            if (enemigoActual.hit()) {
-              nave.score += 3;
-  
-              enemigos.splice(i, 1);
-              enemigoDestruido = true;
-            }
-          } else {
-            enemigos.splice(i, 1);
-            enemigoDestruido = true;
+          if (disparos[j].colision(enemigoActual)) {
+              if (enemigoActual instanceof Tanque) {
+                  nave.score += 1;
+                  if (enemigoActual.hit()) {
+                      nave.score += 3;
+                      enemigos.splice(i, 1);
+                      enemigoDestruido = true;
+                  }
+              } 
+              else if (enemigoActual instanceof Jefe) {
+                  nave.score += 2; 
+                  if (enemigoActual.hit()) {
+                      nave.score += 10; 
+                      enemigos.splice(i, 1);
+                      enemigoDestruido = true;
+                  }
+              }
+              else {
+                  nave.score += 1;
+                  enemigos.splice(i, 1);
+                  enemigoDestruido = true;
+              }
+              
+              disparos.splice(j, 1);
+              break;
           }
-  
-          disparos.splice(j, 1);
-          break;
-        }
       }
       if (enemigos.length === 0) {
         siguienteNivel = "nivel3";
@@ -91,7 +105,7 @@ function nivel3() {
       if (balasEnemigas[i].colision(nave)) {
         nave.score -= 1;
         balasEnemigas.splice(i, 1);
-        nave.lives--;
+        //nave.lives--;
         if (nave.lives <= 0) {
           gameState = "perdiste";
         }
@@ -135,7 +149,7 @@ function iniciarNivel3() {
 
     enemigos.push(new Tanque(width / 2, 90, 5, tanqueIMG));
 
-    enemigos.push(new Jefe(width / 1, 90, 1, boss));
+    enemigos.push(new Jefe(width / 2, 50, 5, boss));
 
     balasEnemigas = [];
 }
