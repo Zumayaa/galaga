@@ -1,4 +1,4 @@
-class balaEnemigo {
+class BalaEnemigo {
     constructor(x, y, speed = 10) {
       this.x = x;
       this.y = y;

@@ -1,4 +1,4 @@
-class movelon extends Enemigo {
+class Movelon extends Enemigo {
     constructor(x, y, speed = 5, img = null) {
       super(x, y, speed, img);
       this.moveTimer = 0;
