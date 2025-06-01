@@ -24,11 +24,13 @@ function mostrarVictoria() {
     fill(255);
     textSize(24);
     text(`Felicidades ${playerName}`, width / 2, height / 2 - 50);
-    text(`Puntaje: ${nave.score}`, width / 2, height / 2);
+    text(`Puntaje: ${puntaje}`, width / 2, height / 2);
     
     fill(150, 255, 150);
     textSize(18);
     text("Presiona ENTER para volver al menú", width / 2, height / 2 + 100);
+
+    guardarTopScore();
 }
   
 function mostrarDerrota() {
@@ -41,11 +43,13 @@ function mostrarDerrota() {
     fill(255);
     textSize(24);
     text(`${playerName}`, width / 2, height / 2 - 50);
-    text(`Puntaje: ${nave.score}`, width / 2, height / 2);
+    text(`Puntaje: ${puntaje}`, width / 2, height / 2);
     
     fill(255, 150, 150);
     textSize(18);
     text("Presiona ENTER para reintentar", width / 2, height / 2 + 100);
+
+    guardarTopScore();
 }
 
 function mostrarTopScores() {

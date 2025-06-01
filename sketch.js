@@ -43,7 +43,8 @@ function setup() {
       playerName = document.getElementById('player-name').value.trim() || "Jugador";
       document.getElementById('name-input').style.display = 'none';
       canvas.show();
-      iniciarJuego();
+      iniciarNivel1(); // Cambiado de iniciarJuego() a iniciarNivel1()
+      gameState = "nivel1";
   });
 }
 
@@ -54,11 +55,10 @@ function draw() {
   switch (gameState) {
     case "menu":
       mostrarMenu();
-      mostrarTopScores();
       break;
 
     case "nivel1":
-      nivel1(); // <- viene de nivel1.js
+      nivel1(); 
       break;
 
     case "transicion":
@@ -66,21 +66,19 @@ function draw() {
       break;
 
     case "nivel2":
-      nivel2(); // más adelante
+      nivel2(); 
       break;
 
     case "nivel3":
-      nivel3(); // más adelante
+      nivel3(); 
       break;
 
     case "ganaste":
       mostrarVictoria();
-      mostrarTopScores();
       break;
 
     case "perdiste":
       mostrarDerrota();
-      mostrarTopScores();
       break;
   }
 }
@@ -108,5 +106,6 @@ function keyPressed() {
     if ((gameState === "ganaste" || gameState === "perdiste") && key === 'Enter') {
         resetGame();
         gameState = "menu";
+        loop();
     }
 }

@@ -72,3 +72,43 @@ canvas {
 #start-game:hover {
     background: #00cc00;
 }
+
+.score-board {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    width: 250px;
+    z-index: 50;
+}
+
+.score-board h3 {
+    color: #00ffff;
+    margin-top: 0;
+    text-align: center;
+}
+
+#scores-list {
+    margin-top: 10px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.score-name {
+    color: white;
+}
+
+.score-points {
+    color: #ffff00;
+    font-weight: bold;
+}

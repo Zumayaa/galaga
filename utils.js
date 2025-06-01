@@ -12,31 +12,46 @@ function colisionRect(a, b) {
     );
 }
 
+function actualizarScoreboard() {
+    const scoresList = document.getElementById('scores-list');
+    scoresList.innerHTML = '';
+    
+    const sortedScores = [...scores].sort((a, b) => b.score - a.score).slice(0, 5);
+    
+    sortedScores.forEach((score, index) => {
+        const scoreItem = document.createElement('div');
+        scoreItem.className = 'score-item';
+        scoreItem.innerHTML = `
+            <span class="score-name">${index + 1}. ${score.name}</span>
+            <span class="score-points">${score.score} pts</span>
+        `;
+        scoresList.appendChild(scoreItem);
+    });
+}
+
 function cargarTopScores() {
-    let guardados = localStorage.getItem("galaga_scores");
+    const guardados = localStorage.getItem("galaga_scores");
     if (guardados) {
         scores = JSON.parse(guardados);
     } else {
         scores = [];
     }
+    return scores;
 }
 
 function guardarTopScore() {
-    // Agregar el nuevo puntaje
     scores.push({
         name: playerName,
         score: nave.score,
         date: new Date().toLocaleDateString()
     });
     
-    // Ordenar por puntaje (mayor a menor)
     scores.sort((a, b) => b.score - a.score);
-    
-    // Mantener solo los top 5
+
     scores = scores.slice(0, 5);
     
-    // Guardar en localStorage
     localStorage.setItem("galaga_scores", JSON.stringify(scores));
+    actualizarScoreboard();
 }
 
 function mostrarHUD() {
@@ -71,6 +86,24 @@ function actualizarDisparos() {
     }
 }
 
+function resetGame() {
+    nave = new Nave();
+    disparos = [];
+    enemigos = [];
+    balasEnemigas = [];
+    nivelActual = 1;
+    puntaje = 0;
+    vidas = 3;
+    tiempoTransicion = 100;
+    
+    siguienteNivel = "";
+
+    cargarTopScores();
+    if (rolita.isPlaying()) {
+        rolita.stop();
+    }
+}
+
 function actualizarEnemigos(){
     for (let i = enemigos.length - 1; i >= 0; i--) {
         enemigos[i].mover();
@@ -98,25 +131,24 @@ function iniciarNivel() {
       }
     }
   
-    // Niveles 2 y 3 se agregan después
 }
 
-function verificarTransiciones(){
+function verificarTransiciones() {
     if (enemigos.length === 0) {
-        nivel++;
-        if (nivel > 3) {
-          guardarTopScore();
-          alert("¡Ganaste el juego!");
-          noLoop();
+        nivelActual++;
+        if (nivelActual > 3) {
+            guardarTopScore(); 
+            gameState = "ganaste";
         } else {
-          iniciarNivel();
+            siguienteNivel = "nivel" + (nivelActual + 1);
+            tiempoTransicion = 100;
+            gameState = "transicion";
         }
     }
     
-      if (vidas <= 0) {
-        guardarTopScore();
-        alert("Juego terminado");
-        noLoop();
+    if (vidas <= 0) {
+        guardarTopScore(); 
+        gameState = "perdiste";
     }
 }
 
@@ -129,21 +161,18 @@ function cargarTopScores() {
 }
   
 function guardarTopScore() {
-    topScores.push(puntaje);
-    topScores.sort((a, b) => b - a);
-    topScores = topScores.slice(0, 5);
-    localStorage.setItem("galaga_scores", JSON.stringify(topScores));
+    if (playerName && puntaje > 0) {
+        scores.push({
+            name: playerName,
+            score: puntaje,
+            date: new Date().toLocaleDateString()
+        });
+  
+        scores.sort((a, b) => b.score - a.score);
+        scores = scores.slice(0, 5);
+        
+        localStorage.setItem("galaga_scores", JSON.stringify(scores));
+        actualizarScoreboard();
+    }
 }
   
-function mostrarTopScores() {
-    background(0);
-    fill(255);
-    textSize(20);
-    textAlign(CENTER);
-    text("Top 5 Puntajes", width / 2, 100);
-    textSize(16);
-    for (let i = 0; i < topScores.length; i++) {
-      text(`${i + 1}. ${topScores[i]} pts`, width / 2, 140 + i * 30);
-    }
-    text("Presiona ENTER para comenzar", width / 5, 350);
-}
