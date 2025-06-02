@@ -95,7 +95,7 @@ function nivel2() {
         nave.score -= 1;
         enemigoTiro.play();
         balasEnemigas.splice(i, 1);
-        nave.lives--;
+        //nave.lives--;
         if (nave.lives <= 0) {
           gameState = "perdiste";
         }

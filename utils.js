@@ -159,7 +159,6 @@ function iniciarNivel() {
     }
 }
 
-javascript
 function verificarTransiciones() {
     if (enemigos.length === 0) {
         if (nivelActual >= 3) {  
