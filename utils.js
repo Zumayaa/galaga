@@ -106,6 +106,9 @@ function actualizarDisparos() {
 }
 
 function resetGame() {
+    tiro.stop();
+    enemigoTiro.stop();
+
     nave = new Nave();
     disparos = [];
     enemigos = [];
@@ -121,6 +124,8 @@ function resetGame() {
     if (rolita.isPlaying()) {
         rolita.stop();
     }
+    
+    gameState = "menu";
 }
 
 function actualizarEnemigos(){

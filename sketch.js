@@ -86,7 +86,7 @@ function draw() {
 }
 
 function keyPressed() {
-    if (gameState === "menu" && key === 'enter') {
+    if (gameState === "menu" && key === 'Enter') {
         if (!rolita.isPlaying()) {
             rolita.setVolume(0.5);
             rolita.loop(); 
@@ -107,7 +107,5 @@ function keyPressed() {
 
     if ((gameState === "ganaste" || gameState === "perdiste") && key === 'Enter') {
         resetGame();
-        gameState = "menu";
-        loop();
     }
 }
