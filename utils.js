@@ -124,7 +124,7 @@ function resetGame() {
     if (rolita.isPlaying()) {
         rolita.stop();
     }
-    
+
     gameState = "menu";
 }
 
@@ -148,30 +148,33 @@ function actualizarEnemigos(){
 function iniciarNivel() {
     enemigos = [];
     disparos = [];
-  
-    if (nivel === 1) {
-      for (let i = 0; i < 10; i++) {
-        enemigos.push(new Enemigo(i * 35 + 20, 50));
-      }
+    balasEnemigas = [];
+    
+    if (nivelActual === 1) {
+        iniciarNivel1();
+    } else if (nivelActual === 2) {
+        iniciarNivel2();
+    } else if (nivelActual === 3) {
+        iniciarNivel3();
     }
-  
 }
 
+javascript
 function verificarTransiciones() {
     if (enemigos.length === 0) {
-        nivelActual++;
-        if (nivelActual > 3) {
-            guardarTopScore(); 
+        if (nivelActual >= 3) {  
+            guardarTopScore();
             gameState = "ganaste";
         } else {
-            siguienteNivel = "nivel" + (nivelActual + 1);
+            nivelActual++;
+            siguienteNivel = "nivel" + nivelActual;
             tiempoTransicion = 100;
             gameState = "transicion";
         }
     }
     
-    if (vidas <= 0) {
-        guardarTopScore(); 
+    if (vidas <= 0 || nave.lives <= 0) {  
+        guardarTopScore();
         gameState = "perdiste";
     }
 }
