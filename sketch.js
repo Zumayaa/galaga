@@ -45,8 +45,8 @@ function setup() {
       playerName = document.getElementById('player-name').value.trim() || "Jugador";
       document.getElementById('name-input').style.display = 'none';
       canvas.show();
-      iniciarNivel1();
-      gameState = "nivel1";
+
+      gameState = "menu";
   });
 }
 
