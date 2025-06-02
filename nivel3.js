@@ -107,7 +107,7 @@ function nivel3() {
       if (balasEnemigas[i].colision(nave)) {
         nave.score -= 1;
         balasEnemigas.splice(i, 1);
-        //nave.lives--;
+        nave.lives--;
         if (nave.lives <= 0) {
           gameState = "perdiste";
         }
