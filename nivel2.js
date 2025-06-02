@@ -1,7 +1,7 @@
 function actualizarNivel2() {
     let cambiarDireccionGrupo = false;
     for (let enemigo of enemigos) {
-      if (!(enemigo instanceof movelon) && (enemigo.x + enemigo.w > width || enemigo.x < 0)) {
+      if (!(enemigo instanceof Movelon) && (enemigo.x + enemigo.w > width || enemigo.x < 0)) {
         cambiarDireccionGrupo = true;
         break;
       }
@@ -10,7 +10,7 @@ function actualizarNivel2() {
     if (cambiarDireccionGrupo) {
       direccionEnemigo *= -1;
       for (let enemigo of enemigos) {
-        if (!(enemigo instanceof movelon)) {
+        if (!(enemigo instanceof Movelon)) {
             enemigo.bajar();
         }
       }
