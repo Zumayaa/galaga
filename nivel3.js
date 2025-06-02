@@ -43,7 +43,7 @@ function actualizarNivel3() {
         disparoProba = 0.04;
       }
       if (random(1) < disparoProba) {
-        balasEnemigas.push(new balaEnemigo(enemigoActual.x + enemigoActual.w / 2, enemigoActual.y + enemigoActual.h));
+        balasEnemigas.push(new BalaEnemigo(enemigoActual.x + enemigoActual.w / 2, enemigoActual.y + enemigoActual.h));
       }
   
       // colision bala jugador enemigo
